@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Predictor</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lato">
+</head>
+<body>
+<style>
+    body {
+        background-image: url( "{{ url_for('static', filename='images/mike-c-valdivia-kZokA2VTKn4-unsplash.jpg') }}");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+
+    h2{
+        width: 500px;
+        height: 103px;
+        margin: 0 auto;
+        margin-top: 30px;
+        text-align: center;
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 40px;
+        line-height: 60px;
+
+        color: #2f4e73;
+        letter-spacing: 0px;
+        padding: 10px;
+    }
+
+    header{
+        height: 100px;
+    }
+
+    form{
+        margin: 0 auto;
+        width: 500px;
+        color: white;
+        position: relative;
+    }
+
+    label, input, textarea{
+        display: block;
+    }
+    input, textarea{
+        width: 300px;
+        border-radius: 30px;
+        padding: 5px;
+        font-family: 'Lato';
+        font-size: 1em;
+        transition: border 0.5s;
+        border: solid 2px #98d4f3;
+    }
+
+
+    label{
+        font-size: 1.5em;
+        margin-top: 5px;
+        padding-left: 20px;
+    }
+
+
+    fieldset {
+        border: 0;
+    }
+
+    input[type="submit"]{
+        background-color: white;
+        color: #77bde0;
+        height: 50px;
+        cursor: pointer;
+        margin-top: 30px;
+        font-size: 30px;
+        font-family: 'Lato';
+    }
+
+    div.home
+    {
+        position: absolute;
+        width: 70px;
+        height: 25px;
+        left: 1050px;
+        top: 36px;
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 29px;
+
+        color: #2f4e73;
+
+    }
+
+    a:link {
+        color: #2f4e73;
+    }
+
+    a:visited {
+        color: #2f4e73;
+    }
+    a:hover, a:visited, a:link, a:active
+    {
+        text-decoration: none;
+    }
+
+</style>
+
+<header>
+    <h2>Property Info Form</h2>
+</header>
+<div id="form">
+
+    <form id="realform" method="post">
+
+
+        <label for="bedrooms">Bedrooms*</label>
+        <input type="text" id="bedrooms" name="bedrooms" />
+
+
+
+        <label for="bathrooms">Bathrooms*</label>
+        <input type="text" id="bathrooms" name="bathrooms" />
+
+
+
+        <label for="beds">Beds*</label>
+        <input type = "text" id="beds" name="beds">
+
+
+
+        <label for="room_type">Room Type*</label>
+        <fieldset>
+            <p>
+                <select id = "room_type" name = "room_type">
+                    <option value = "Private Room">Private Room</option>
+                    <option value = "Entire home/apt">Entire home/apt</option>
+                    <option value = "Shared Room">Shared Room</option>
+                    <option value = "Hotel Room">Hotel Room</option>
+                </select>
+            </p>
+        </fieldset>
+
+
+        <label for="property_type">Property Type*</label>
+        <fieldset>
+            <p>
+                <select id = "property_type" name = "property_type">
+                    <option value = "Hotel">Hotel</option>
+                    <option value = "House">House</option>
+                    <option value = "Apartment">Apartment</option>
+                    <option value = "Guest suite">Guest Suite</option>
+                    <option value = "Condominium">Condominium</option>
+                    <option value = "Townhouse">Townhouse</option>
+                    <option value = "Loft">Loft</option>
+                    <option value = "Serviced apartment">Serviced apartment</option>
+                    <option value = "others">Others</option>
+                </select>
+            </p>
+        </fieldset>
+
+
+
+
+        <label for="zip">Zipcode*</label>
+        <input type="text" id="zip" name="zip" />
+
+
+
+        <label for="borough">Borough*</label>
+        <fieldset>
+            <p>
+                <select id = "borough" name = "borough-form">
+                    <option value = "Manhattan">Manhattan</option>
+                    <option value = "Brooklyn">Brooklyn</option>
+                    <option value = "Queens">Queens</option>
+                    <option value = "Staten Island">Staten Island</option>
+                    <option value = "The Bronx">The Bronx</option>
+                </select>
+            </p>
+        </fieldset>
+
+        <label for="accommodates">Accommodates*</label>
+        <input type="text" id="accommodates" name="accommodates" />
+
+        <label for="cleaning_fee">Cleaning Fee*</label>
+        <input type="text" id="cleaning_fee" name="cleaning_fee" />
+
+        <label for="host_listings_count">Host Listings Count*</label>
+        <input type="text" id="host_listings_count" name="host_listings_count" />
+
+        <label for="availability_90">Availability in 90 days*</label>
+        <input type="text" id="availability_90" name="availability_90" />
+
+        <label for="extra_people">Each Extra People Cost*</label>
+        <input type="text" id="extra_people" name="extra_people" />
+
+        <label for="security_deposit">Security Deposit*</label>
+        <input type="text" id="security_deposit" name="security_deposit" />
+
+        <label for="minimum_nights">Minimum Nights*</label>
+        <input type="text" id="minimum_nights" name="minimum_nights" />
+
+        <label for="date">Date*</label>
+        <input type="date" id="date" name = "date">
+
+
+        <input type="submit" value="Submit" />
+
+    </form>
+</div>
+<div id = "home" class="home">
+    <h3><a href="{{ url_for('index') }}">Home </a></h3>
+</div>
+
+
+
+</body>
+</html>

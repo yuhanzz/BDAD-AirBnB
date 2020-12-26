@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AirBnB Predictor</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lato">
+</head>
+<body>
+<style>
+    body {
+        background-image: url("{{ url_for('static', filename='images/oliver-niblett-wh-7GeXxItI-unsplash.jpg') }}");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+
+
+    div.ProjectName {
+        position: absolute;
+        width: 640px;
+        height: 276px;
+        left: 100px;
+        top: 107px;
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 30px;
+        line-height: 55px;
+        /* or 150% */
+        color: #2F4E73;
+    }
+
+    div.header{
+        position: absolute;
+        width: 200px;
+        height: 20px;
+        left: 100px;
+        top: 5px;
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 25px;
+        color: #2F4E73;
+    }
+
+
+
+    div.About{
+        position: absolute;
+        width: 70px;
+        height: 25px;
+        left: 1050px;
+        top: 5px;
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 29px;
+
+        color: #2F4E73;
+    }
+
+    div.rectangle{
+        border-radius: 25px;
+        position: absolute;
+        width: 131px;
+        height: 63px;
+        left: 1197px;
+        top: 20px;
+        background-color: #EA918D;
+    }
+
+    div.Predict{
+        position: absolute;
+        width: 83px;
+        height: 25px;
+        left: 1220px;
+        top: 5px;
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 29px;
+        text-align: center;
+
+        color: #2F4E73;
+    }
+
+    /* unvisited link */
+    a:link {
+        color: #2F4E73;
+    }
+
+    a:visited {
+        color: #2F4E73;
+    }
+    a:hover, a:visited, a:link, a:active
+    {
+        text-decoration: none;
+    }
+
+
+</style>
+
+<div id="ProjectName" class ="ProjectName">
+    <h1>Predictions of AirBnB Prices powered by Location AI</h1>
+</div>
+
+<div id = "header" class = "header">
+    <h5>AirBnB Predictor</h5>
+</div>
+
+<div id = "About" class = "About">
+    <h5><a href="{{ url_for('about') }}">About </a></h5>
+</div>
+
+<div id="rectangle" class = "rectangle">
+
+
+</div>
+
+<div id = "Predict" class = "Predict">
+    <h5><a href="{{ url_for('predict') }}">Predict</a></h5>
+</div>
+
+</body>
+</html>

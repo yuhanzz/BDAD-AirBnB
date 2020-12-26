@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result Page</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lato">
+</head>
+<body>
+<style>
+    body {
+        background-image: url("{{ url_for('static', filename='images/hieu-vu-minh-IRkAbNRT_Yg-unsplash.jpg') }}");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+
+    h2 {
+        position: absolute;
+        width: 289px;
+        height: 103px;
+        left: 575px;
+        top: 36px;
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 40px;
+        line-height: 60px;
+        text-align: center;
+
+        color: #2f4e73;
+        letter-spacing: 0px;
+        background: rgb(0, 0, 0); /* fallback color */
+        background: rgba(0, 0, 0, 0);
+        padding: 10px;
+    }
+
+
+    h3 span{
+        letter-spacing: -1px;
+        background: rgb(0, 0, 0); /* fallback color */
+        background: rgba(0, 0, 0, 0.7);
+        padding: 10px;
+        position: absolute;
+        width: 798px;
+        height: 300px;
+        left: 351px;
+        top: 150px;
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 30px;
+        line-height: 36px;
+
+    }
+
+    p{
+        text-align: center;
+        color: #FFFFFF;
+    }
+
+    div.home
+    {
+        position: absolute;
+        width: 70px;
+        height: 25px;
+        left: 1050px;
+        top: 36px;
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 29px;
+
+        color: white;
+    }
+
+    div.predict{
+        position: absolute;
+        width: 70px;
+        height: 25px;
+        left: 1220px;
+        top: 26px;
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 26px;
+        line-height: 29px;
+
+        color: white;
+    }
+
+    a:link {
+        color: white;
+    }
+
+    a:visited {
+        color: white;
+    }
+    a:hover, a:visited, a:link, a:active
+    {
+        text-decoration: none;
+    }
+
+
+</style>
+
+
+<header>
+    <h2>Result</h2>
+
+    <h3><span>
+        <p>{{price}}</p>
+</span></h3>
+</header>
+
+<div id = "home" class="home">
+    <h3><a href="{{ url_for('index') }}">Home </a></h3>
+</div>
+
+<div id = "Predict" class = "predict">
+    <h5><a href="{{ url_for('predict') }}">Predict</a></h5>
+</div>
+
+
+<!--<script src="https://www.example.com/javascripts/api/tableau-2.js">-->
+    <!---->
+<!--</script>-->
+
+<!--&lt;!&ndash; Empty div where the viz will be placed &ndash;&gt;-->
+<!--<div id="tableauViz"></div>-->
+</body>
+</html>

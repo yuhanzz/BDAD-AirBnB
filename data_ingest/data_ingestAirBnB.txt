@@ -1,0 +1,17 @@
+I first downloaded the data(listings.csv.gz(for 13 months) and neighborhood.csv and neighborhoods.geojson) from http://insideairbnb.com/get-the-data.html. 
+
+I unzipped all the listings.csv.gz file for 13 months, put them into a folder,and rezipped the folder. Then, I copied the zipped folder into dumbo.es.its.nyu.edu using an application, FileZilla. 
+
+FileZilla input: 
+	host: dumbo.es.its.nyu.edu
+	Username: lh2978
+	Password:
+	Port: 22 
+	
+
+I unzipped the folder and copied the folder into hdfs with the commands: 
+
+hdfs dfs -mkdir "project/data"
+hdfs dfs -put "listings" "project/data" 
+
+

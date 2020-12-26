@@ -1,0 +1,90 @@
+//original data: 
+
+// this isn't really the original data because the original data consisted of 13 csv files but it would take too long to go through all 13 files for profiling 
+//so I combined all of them as a combined_unclean in my clean.scala. (Used only for profiling)
+
+//However, I cleaned all the csvs seperately and then combined the clean csvs to get a combined_clean dataframe (all shown in clean.scala).
+
+val uncleaned_data = spark.read.parquet("project/data/listings/combined_unclean")
+
+val uncleaned_columns = uncleaned_data.columns.size 
+println(uncleaned_columns)
+//106 fields
+
+uncleaned_data.printSchema 
+//too long to show output here but I will show the original schema for the columns used in the clean_data 
+/*
+root
+ |-- zipcode: string (nullable = true)
+ |-- borough: string (nullable = true)
+ |-- property_type: string (nullable = true)
+ |-- room_type: string (nullable = true)
+ |-- accommodates: integer (nullable = true)
+ |-- bathrooms: double (nullable = true)
+ |-- bedrooms: integer (nullable = true)
+ |-- beds: integer (nullable = true)
+ |-- price: string (nullable = true)
+ |-- longitude: double (nullable = true)
+ |-- latitude: double (nullable = true)
+ |-- Date: string (nullable = false)
+*/
+
+val uncleaned_records = uncleaned_data.count 
+println(uncleaned_records)
+//num of data records = 644828
+
+
+//cleaned data: 
+
+val cleaned_data = spark.read.format("csv").option("header", "true").option("inferSchema","true").load("project/data/listings/combined_header")
+
+val cleaned_columns = cleaned_data.columns.size 
+println(cleaned_columns)
+//12
+
+cleaned_data.printSchema
+/*
+root
+ |-- zipcode: integer (nullable = true)
+ |-- borough: string (nullable = true)
+ |-- property_type: string (nullable = true)
+ |-- room_type: string (nullable = true)
+ |-- accommodates: integer (nullable = true)
+ |-- bathrooms: double (nullable = true)
+ |-- bedrooms: integer (nullable = true)
+ |-- beds: integer (nullable = true)
+ |-- price: double (nullable = true)
+ |-- longitude: double (nullable = true)
+ |-- latitude: double (nullable = true)
+ |-- Date: string (nullable = true)
+*/
+
+
+/* 1. changed the price to be double by using a udf to replace all the $ to empty string in front of all records(e.g. $1499.00 -> 1499.00) and then cast the column to be DoubleType
+
+   2. changed the zipcode to be integer dropping records that have null or also inaccurate formats for zipcode and then cast the column to be IntType.
+
+   3. Added Date Column so can combine all months together into a huge dataframe. 
+*/
+
+val cleaned_records = cleaned_data.count
+println(cleaned_records)
+//631933
+
+/*different amount of records because
+	1. Dropped records that had nulls or also inaccurate formats for zipcode.
+
+	2. Dropped all the records which have null for all three columns (bedrooms, bathrooms, and beds)
+	   eg. (null,null,null) is a record that will be dropped but (1,1,0,null) will not be dropped because only one null. 
+	   
+	   With records that have two null, I use the other column to replace one of the nulls. 
+	   e.g. (1,null,null) will be (1,1,null) which will turn the record into having one null which will handled with the one null situation.
+
+	   With records that have only one null, I use the other columns such as bathrooms and bedrooms to replace the null. 
+	   e.g (2,2,null). I replace the null for the beds with the quantity of bedrooms.  
+
+	3. Dropped all the records that had null after using na.drop()
+	   
+*/
+
+

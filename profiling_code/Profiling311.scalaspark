@@ -1,0 +1,51 @@
+val originalRdd = sc.textFile("./team_project/nyc311.csv")
+
+val cleanedRdd = sc.textFile("./team_project/clean_nyc311")
+
+
+val originalNum = originalRdd.count()
+// numOfOriginal: Long = 22633291
+// filter out records which do not have 41 fields, reduce the number to 20591709
+// filter out records which have "" value in the selected columns, reduce the number to 20586579
+// filter out records which do not have an integer in the id and zipcode fields, reduce the number to 20586555
+val cleanedNum = cleanedRdd.count()
+// numOfCleaned: Long = 20586555
+
+
+def formatRecord(row: String) = {
+	val col = row.split(",")
+	Tuple9(col(0).toInt, col(1).substring(6, 10)+"/"+col(1).substring(0, 2)+"/"+col(1).substring(3,5), col(2), col(3), col(4).toInt, col(5), col(6), col(7).toDouble, col(8).toDouble)
+}
+val cleanedRdd2 = cleanedRdd.map(line => formatRecord(line.substring(1, line.length-1)))
+
+val dates = cleanedRdd2.map(line => line._2).distinct().collect()
+// scala> dates.length
+// res22: Int = 3751
+
+val mindate = cleanedRdd2.map(line => line._2).distinct().min()
+// mindate: String = 2010/01/01
+val maxdate = cleanedRdd2.map(line => line._2).distinct().max()
+// maxdate: String = 2020/04/08
+
+val departments = cleanedRdd2.map(line => line._3).distinct().collect()
+// departments: Array[String] = Array(EDC, DPR, TLC, HRA, FDNY, DOHMH, DFTA, DOITT, 3-1-1, DSNY, DHS, DEP, HPD, DOB, DOE, DOF, NYPD, NYCEM, DCA, DOT)
+val types = cleanedRdd2.map(line => line._4).distinct().collect()
+// scala> types.length
+// res23: Int = 276
+val zipcodes = cleanedRdd2.map(line => line._5).distinct().collect()
+// scala> zipcodes.length
+// res24: Int = 304
+val CBs = cleanedRdd2.map(line => line._6).distinct().collect()
+// scala> CBs.length
+// res25: Int = 77
+val boroughs = cleanedRdd2.map(line => line._7).distinct().collect()
+// boroughs: Array[String] = Array(MANHATTAN, QUEENS, STATEN ISLAND, BRONX, Unspecified, BROOKLYN)
+
+val minlat = cleanedRdd2.map(line => line._8).min()
+// minlat: Double = 39.5525551788817
+val maxlat = cleanedRdd2.map(line => line._8).max()
+// maxlat: Double = 40.91294056699566
+val minlong = cleanedRdd2.map(line => line._9).min()
+// minlong: Double = -78.18450807772693
+val maxlong = cleanedRdd2.map(line => line._9).max()
+// maxlong: Double = -73.70029199533596

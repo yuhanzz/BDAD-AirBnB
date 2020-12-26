@@ -1,0 +1,55 @@
+val rdd = sc.textFile("./team_project/nyc311.csv")
+
+def splitByOuterComma(line:String) : Array[String] = {line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)")}
+
+val rdd1 = rdd.map(line=>splitByOuterComma(line))
+
+val numberOfCols = rdd1.take(1)(0).length
+
+def filterByNumOfCols(row: Array[String], number: Int) : Boolean = {row.length == number}
+
+val rdd2 = rdd1.filter(row => filterByNumOfCols(row, numberOfCols))
+// num2: Long = 20591709
+val attrIndexes = Array(0, 1, 3, 5, 8, 23, 25, 38, 39)
+
+def filterByMissingAttr(row: Array[String], attrIndexes: Array[Int]) : Boolean = {for (index <- attrIndexes) {if (row(index) == "") {return false}}true}
+
+val rdd3 = rdd2.filter(row => filterByMissingAttr(row, attrIndexes))
+// num3: Long = 20586579
+
+val attrIntIndexes = Array(0, 8)
+
+def filterByNInt(row: Array[String], attrIntIndexes: Array[Int]) : Boolean = {for (index <- attrIntIndexes) {val r = scala.util.Try(row(index).toInt).isSuccess; if (!r) {return false}};true}
+
+val rdd4 = rdd3.filter(row => filterByNInt(row, attrIntIndexes))
+// num4: Long = 20586555
+
+val attrDoubleIndexes = Array(38, 39)
+
+def filterByNDouble(row: Array[String], attrDoubleIndexes: Array[Int]) : Boolean = {
+	for (index <- attrDoubleIndexes) {
+		val r = scala.util.Try(row(index).toDouble).isSuccess
+		if (!r) {return false}
+	}
+	true
+}
+
+val rdd5 = rdd4.filter(row => filterByNDouble(row, attrDoubleIndexes))
+
+def selectFields(row: Array[String]) : String = {
+	var res = ""
+	for (index <- attrIndexes) {
+		res += row(index)+","
+	}
+	res.substring(0, res.length-1)
+}
+val rdd6 = rdd5.map(row => selectFields(row))
+
+def formatRecord(row: String) = {
+	val col = row.split(",")
+	Tuple9(col(0).toInt, col(1).substring(0, 10), col(2), col(3), col(4).toInt, col(5), col(6), col(7).toDouble, col(8).toDouble)
+}
+
+val rdd7 = rdd6.map(row => formatRecord(row))
+
+rdd7.saveAsTextFile("./team_project/clean_nyc311")

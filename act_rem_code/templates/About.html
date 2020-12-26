@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Lato">
+
+
+</head>
+<body>
+
+<style>
+    body {
+        background-image: url( "{{ url_for('static', filename='images/patrick-tomasso-SVVTZtTGyaU-unsplash.jpg') }}");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+    h2 span {
+        position: absolute;
+        width: 289px;
+        height: 103px;
+        left: 575px;
+        top: 36px;
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 40px;
+        line-height: 60px;
+        text-align: center;
+
+        color: #2f4e73;
+        letter-spacing: 0px;
+        background: rgb(0, 0, 0); /* fallback color */
+        background: rgba(0, 0, 0, 0);
+        padding: 10px;
+    }
+
+    h3 span{
+        letter-spacing: -1px;
+        background: rgb(0, 0, 0); /* fallback color */
+        background: rgba(0, 0, 0, 0.4);
+        padding: 10px;
+        position: absolute;
+        width: 798px;
+        height: 190px;
+        left: 351px;
+        top: 150px;
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 30px;
+        line-height: 36px;
+        text-align: center;
+
+        color: #FFFFFF;
+    }
+
+    div.home
+    {
+        position: absolute;
+        width: 70px;
+        height: 25px;
+        left: 1050px;
+        top: 36px;
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 29px;
+
+        color: #2f4e73;
+
+    }
+    a:link {
+        color: #2f4e73;
+    }
+
+    a:visited {
+        color: #2f4e73;
+    }
+    a:hover, a:visited, a:link, a:active
+    {
+        text-decoration: none;
+    }
+
+    div.rectangle{
+        border-radius: 25px;
+        position: absolute;
+        width: 131px;
+        height: 63px;
+        left: 1197px;
+        top: 46px;
+        background-color: #EA918D;
+    }
+
+    div.predict{
+        position: absolute;
+        width: 83px;
+        height: 25px;
+        left: 1220px;
+        top: 36px;
+
+        font-family: Lato;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 29px;
+        text-align: center;
+
+        color: #2F4E73;
+    }
+
+
+
+
+</style>
+
+<h2><span> About </span></h2>
+
+<div id = "home" class="home">
+    <h3><a href="{{ url_for('index') }}">Home </a></h3>
+</div>
+
+<div id="rectangles" class = "rectangle">
+
+
+</div>
+
+<div id = "predict" class = "predict">
+    <h3><a href="{{ url_for('predict') }}">Predict</a></h3>
+</div>
+
+<h3><span>
+This project is about analyzing AirBnB Data, NYC 311 Data, and also Real Estate Data to give a good price for someone who is trying to list their property on AirBnB based on other AirBnB property similar and close to theirs, crime reports near or in their zipcode, and real estate prices in their zipcode.
+</span></h3>
+
+</body>
+</html>
